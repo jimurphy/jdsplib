@@ -26,5 +26,4 @@ private:
     float       gainVal;
 };
 
-
 #endif /* Gain_h */
