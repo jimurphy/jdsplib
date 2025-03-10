@@ -14,7 +14,7 @@ public:
     
     ~Gain(){};
     
-    inline void SetGain(float gain){
+    inline void setGain(float gain){
         gainVal = gain;
     }
 
