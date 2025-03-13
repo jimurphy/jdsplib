@@ -42,7 +42,7 @@ class SinOsc {
     private:
         int       sr = 0;
         float     freq = 0.0f;
-        float     phase = 0.0f;
+        double    phase = 0.0;
         float     amp = 1.0f;
     };
 
