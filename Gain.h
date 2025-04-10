@@ -18,8 +18,8 @@ public:
         gainVal = gain;
     }
 
-    inline void dsp(float input, float& output){
-        output = input * gainVal;
+    inline void dsp(float& output){
+        output = output * gainVal;
     }
     
 private:

@@ -14,6 +14,11 @@
 
 class ZDSVF {
 public:
+
+    enum FilterType{
+        HP, BP, LP, BR
+    };
+
     ZDSVF(){
     }
     
@@ -71,15 +76,15 @@ public:
         driveGain = drive; //range can exceed 1.0
     }
     
-    inline void setFilterType(float filter){
-        filterType = filter;
+    inline void setFilterType(FilterType filter){
+        filtType = filter;
     }
 
-    inline float dsp(float input){
+    inline void dsp(float& output){
         //process input through tanh waveshaper
-        input = fasttanh(input * driveGain);
+        output = fasttanh(output * driveGain);
         
-        hp = (input - (2.0*r+g)*z1-z2)/(1.0+2.0*r*g+g*g);
+        hp = (output - (2.0*r+g)*z1-z2)/(1.0+2.0*r*g+g*g);
         bp = g*hp+z1;
         bp = tanh(1.0*bp + 1e-18); //Nonlinear processing from pg353 of pirkle plugin book.
         lp = g*bp+z2;
@@ -89,17 +94,17 @@ public:
         z1 = g*hp + bp;
         z2 = g*bp + lp;
         
-        if(filterType == 4.0){
-            return br;
+        if(filtType == BR){
+            output = br;
         }
-        else if(filterType == 3.0){
-            return lp;
+        else if(filtType == LP){
+            output = lp;
         }
-        else if (filterType == 2.0){
-            return bp;
+        else if (filtType == BP){
+            output = bp;
         }
         else{
-            return hp;
+            output = hp;
         }
     }
     
@@ -124,4 +129,6 @@ private:
     float       br = 0.0; //band reject, notch
     float       z1 = 0.0;
     float       z2 = 0.0;
+
+    ZDSVF::FilterType filtType = HP;
 };
