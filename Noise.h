@@ -1,4 +1,3 @@
-//
 // Noise.h
 // White noise generator
 // std lib PNRG using Mersenne Twister is default
@@ -6,11 +5,10 @@
 // jim murphy 2025 
 // Thanks to https://github.com/Arifd/Noise-Algorithms
 //
-
-#include <random>
-
 #ifndef Noise_h
 #define Noise_h
+
+#include <random>
 
 class Noise{
     public:
