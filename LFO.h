@@ -36,7 +36,7 @@ public:
     }
     
     inline void setFreq(float freq, float fs){
-        fs = sr;
+        sr = fs;
         inc = freq/sr;
     }
 
